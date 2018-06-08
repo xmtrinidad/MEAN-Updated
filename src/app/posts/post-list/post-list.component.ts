@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Post} from '../post.model';
 
 @Component({
   selector: 'app-post-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
+  // Posts are passed in from the parent component
+  @Input() posts: Post[] = [];
 
   constructor() { }
 
