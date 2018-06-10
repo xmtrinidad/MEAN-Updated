@@ -18,7 +18,7 @@ Link to course: <https://www.udemy.com/angular-2-and-nodejs-the-practical-guide/
 * Optimizations
 * Deployment
 
-## New Things
+## New Things (Front-End)
 
 ### Learned about [:host](https://developer.mozilla.org/en-US/docs/Web/CSS/:host()), which lets you apply CSS to an entire component.
 
@@ -65,7 +65,7 @@ By referencing the form, I can access the form inputs by their name.  I can also
 
 ---
 
-## Referencing inputs to display errors
+### Referencing inputs to display errors
 
 Using Angular Material, the process for showing error messages based on valid form fields is straight forward.  The first thing is to ensure that the input fields have references:
 ```html
@@ -140,6 +140,28 @@ ngOnDestroy() {
 ```
 
 ---
+
+
+## New Things (Back-End)
+
+### Using next()
+
+In Node.js/Express remember to use the next() function to continue along the middleware chain if you are not sending data back.  For example:
+
+```javascript
+app.use((req, res, next) => {
+  console.log('First middleware');
+  next();
+});
+
+app.use((req, res, next) => {
+  res.send('Hello from express');
+});
+```
+
+In the first *app.use()* function, if **next()** is not used, the program will remain at that middleware and eventually timeout, not loading any of the data from other middleware.
+
+The 2nd *app.use()* method doesn't need a **next()** method because a response is being sent (**res.send()**)
 
 
 
