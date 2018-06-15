@@ -141,6 +141,18 @@ ngOnDestroy() {
 
 ---
 
+### Using *routerLinkActive* with Angular Material
+
+The Angular *routerLinkActive* property will apply a class on a page link if it is the current page.  Angular Material has some helper methods that will apply styling so that you don't have to define an "active" class yourself
+
+```html
+<li><a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a></li>
+```
+
+In the example above, *routerLinkActive* is assigned the Angular Material class *mat-accent* and, when the page is navigated to, applies the Material Design styling defined by the application.
+
+---
+
 
 ## New Things (Back-End)
 
@@ -162,6 +174,9 @@ app.use((req, res, next) => {
 In the first *app.use()* function, if **next()** is not used, the program will remain at that middleware and eventually timeout, not loading any of the data from other middleware.
 
 The 2nd *app.use()* method doesn't need a **next()** method because a response is being sent (**res.send()**)
+
+---
+
 
 
 
