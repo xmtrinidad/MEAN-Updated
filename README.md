@@ -168,6 +168,30 @@ With the *Elvis* operator in place, the input is filled when the data is retriev
 
 ---
 
+## Proxy a file input click to a button
+
+There is a default input type called "file" that will allow the user to choose a local file to upload when it is clicked.  However, the styling does not match with Angular Material, which is being used in this project.
+
+The solution is to proxy a click.  Basically, an Angular Material button is displayed above an *input* element:
+
+```html
+<div>
+  <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+  <input type="file" #filePicker>
+</div>
+```
+
+The <input> element is hidden in the CSS using an attribute selector:
+```css
+input[type="file"] {
+  visibility: hidden;
+}
+```
+
+The <input> element has a reference associated with it called **#filePicker**.  The Angular Material button then has a *click* attribute on it, that references the **#filePicker** and adds a *click()* method.  This is a proxied click that will open the file selector.
+
+---
+
 
 ## New Things (Back-End)
 
