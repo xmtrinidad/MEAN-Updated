@@ -153,6 +153,21 @@ In the example above, *routerLinkActive* is assigned the Angular Material class 
 
 ---
 
+## "Elvis" Operator (?)
+
+For this application, when editing a post, the correct data is fetched to display the post that is being edited.  However, when refreshing the page while on the selected post, the console displays an error because, when initially loading the page, there is no data to display since it is fetched asynchronously.
+
+To avoid the errors generated on the initial page load, an *Elvis (?)* operator is used on the HTML inputs:
+
+```html
+<input
+  [ngModel]="post?.title">
+```
+
+With the *Elvis* operator in place, the input is filled when the data is retrieved from the back-end and the error is no longer generated.
+
+---
+
 
 ## New Things (Back-End)
 
