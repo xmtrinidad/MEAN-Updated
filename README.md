@@ -192,6 +192,64 @@ The <input> element has a reference associated with it called **#filePicker**.  
 
 ---
 
+### setValue() and patchValue() With Reactive Forms
+
+Using Reactive Forms in Angular allows for a form and all its properties (values, validators, etc) to be controlled via the TypeScript code.
+
+To set values programatically, the *setValue()* and *patchValue()* methods need to be used:
+
+```typescript
+this.form.setValue({
+    'title': this.post.title,
+    'content': this.post.content
+});
+``` 
+
+In the above code snippet, *setValue()* needs to set all the form controls to function properly, but if only one form control needs to be set, *patchValue()* should be used:
+
+```typescript
+this.form.patchValue({image: file});
+```
+
+When patching a value this way, the form control affected should be updated and validated using the *updateValueAndValidity()* method:
+```typescript
+this.form.get('image').updateValueAndValidity();
+```
+
+---
+
+## Implementing a File Reader
+
+1.  Start with the *input* element that detects a change (when a file is uploaded):
+```html
+<input type="file" #filePicker (change)="onImagePicked($event)">
+```
+
+2.  In the *onImagePicked()* method, which takes in an **event** as a parameter
+```javascript
+const file = (event.target as HTMLInputElement).files[0];
+```
+  Here, a *file* constant is defined that is casted as an HTMLInputElement.  The casting is necessary for typescript to know that there is a *files* property associated with *event.target*, which returns an array (that's why the first item is chosen ([0])).
+  
+ 3.  Create a new instance of the [FileReader](https://developer.mozilla.org/en-US/docs/Web/API/FileReader) object to read the uploaded file
+ ```javascript
+const reader = new FileReader();
+```
+
+4.  Use the new FileReader instance to set the result of the uploaded file
+```javascript
+reader.onload = () => {
+  this.imagePreview = reader.result;
+};
+```
+  This is an asynchronous action that sets *this.imagePreview* to the result when the file is finished being uploaded
+  
+ 5.  Using the [readAsDataURL()](https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL) method, the File will be converted into a URL that the *src* property on an *img* element can use to display the file uploaded
+
+ ```javascript
+reader.readAsDataURL(file);
+```
+
 
 ## New Things (Back-End)
 
